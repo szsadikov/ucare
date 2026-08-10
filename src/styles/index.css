@@ -1,0 +1,69 @@
+/* The single stylesheet entry point.
+   Order matters: tokens → component styles → Tailwind. */
+@import "./tokens.css";
+@import "./components.css";
+
+/* Tailwind is loaded as two layers and WITHOUT preflight — both on purpose.
+
+   1. No preflight. Its reset changes layout: `svg{display:block}` removes the
+      baseline of an inline icon, so any row containing one sits 5px lower —
+      on the landing page that accumulated into a 22px drift by the footer.
+      The design system ships its own reset (tokens.css, the base block).
+
+   2. Prefixed with `tw:`. Without it the utilities collide with design-system
+      class names: Tailwind's `overline` is `text-decoration-line: overline`
+      and drew a line above every overline label; `text-secondary` and
+      `text-muted` also become utilities as soon as those colours are declared
+      in @theme. With the prefix, `uc-*`, `overline`, `body`, `caption`,
+      `numeric` and `h1`–`h3` stay with the design system, while utilities are
+      written `tw:flex`, `tw:bg-surface`. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme) prefix(tw);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(tw);
+
+/* Tailwind is fed the same tokens as the rest of the system, so utilities
+   like bg-surface / text-accent / rounded-md resolve to the very same CSS
+   variables the inline styles use. Tailwind introduces no values of its own. */
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-border-control: var(--border-control);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-active: var(--accent-active);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-disabled: var(--text-disabled);
+  --color-text-on-accent: var(--text-on-accent);
+  --color-on-brand: var(--on-brand);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --color-navy: var(--blue-800);
+  --color-navy-deep: var(--blue-900);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-full: var(--radius-full);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  --ease-brand: var(--ease);
+}
+
+/* Page background, matching the app shell. */
+body { margin: 0; background: var(--bg); }

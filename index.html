@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- These are static rather than set at runtime: preview bots (Telegram,
+         Slack, search crawlers) do not execute JS and would see an empty page.
+         The copy is Uzbek — the default language — and `description` repeats
+         `heroSub` from src/i18n/uz.ts verbatim so it cannot drift from what the
+         page actually says. Absolute URLs use the www host: the apex 308s to it. -->
+    <title>uCare — korporativ imtiyozlar platformasi</title>
+    <meta
+      name="description"
+      content="Xodimlarni ish haqi fondini oshirmasdan saqlab qoling: byudjet o'zgarmaydi, foyda esa har bir xodim uchun shaxsiy bo'ladi."
+    />
+    <link rel="canonical" href="https://www.ucare.uz/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="uCare" />
+    <meta property="og:url" content="https://www.ucare.uz/" />
+    <meta property="og:title" content="uCare — korporativ imtiyozlar platformasi" />
+    <meta
+      property="og:description"
+      content="Xodimlarni ish haqi fondini oshirmasdan saqlab qoling: byudjet o'zgarmaydi, foyda esa har bir xodim uchun shaxsiy bo'ladi."
+    />
+    <meta property="og:image" content="https://www.ucare.uz/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="uz_UZ" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

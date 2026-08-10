@@ -1,0 +1,127 @@
+/* uCare component styles.
+   The uc- prefix keeps these from colliding with utility classes.
+   Every value here comes from a token; no raw hex below this line. */
+
+/* ── button ─────────────────────────────────────────────── */
+.uc-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);height:40px;padding:0 var(--space-4);border-radius:var(--radius-md);font:600 15px/1.2 var(--font-body);border:1px solid transparent;cursor:pointer;background:var(--accent);color:var(--text-on-accent);transition:background var(--duration-fast) var(--ease),border-color var(--duration-fast) var(--ease),transform var(--duration-fast) var(--ease)}
+.uc-btn:hover{background:var(--accent-hover)}
+.uc-btn:active{background:var(--accent-active);transform:translateY(1px)}
+.uc-btn[disabled]{background:var(--border);color:var(--text-disabled);cursor:not-allowed;transform:none}
+.uc-btn--secondary{background:transparent;color:var(--accent);border-color:var(--border-strong)}
+.uc-btn--secondary:hover{background:var(--accent-subtle);border-color:var(--accent)}
+.uc-btn--secondary:active{background:var(--accent-subtle)}
+.uc-btn--secondary[disabled]{background:transparent;border-color:var(--border);color:var(--text-disabled)}
+.uc-btn--ghost{background:transparent;color:var(--text-secondary)}
+.uc-btn--ghost:hover{background:var(--surface-sunken);color:var(--text-primary)}
+.uc-btn--ghost[disabled]{background:transparent;color:var(--text-disabled)}
+.uc-btn--danger{background:var(--danger);color:#fff}
+.uc-btn--danger:hover{filter:brightness(.92)}
+.uc-btn--danger:active{filter:brightness(.86)}
+.uc-btn--sm{height:32px;padding:0 var(--space-3);font-size:13px}
+.uc-btn--lg{height:48px;padding:0 var(--space-5);font-size:17px}
+.uc-btn--block{width:100%}
+.uc-btn--loading{pointer-events:none}
+.uc-spinner{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-top-color:transparent;animation:uc-spin 700ms linear infinite;flex:none}
+@keyframes uc-spin{to{transform:rotate(360deg)}}
+.uc-iconbtn{display:inline-grid;place-items:center;width:40px;height:40px;padding:0;border-radius:var(--radius-md);border:1px solid transparent;background:transparent;color:var(--text-secondary);cursor:pointer;transition:background var(--duration-fast) var(--ease),color var(--duration-fast) var(--ease)}
+.uc-iconbtn:hover{background:var(--surface-sunken);color:var(--text-primary)}
+.uc-iconbtn--sm{width:32px;height:32px}
+
+/* ── fields ─────────────────────────────────────────────── */
+.uc-field{display:flex;flex-direction:column;gap:var(--space-2)}
+.uc-field > label{font:500 13px/18px var(--font-body);color:var(--text-secondary)}
+.uc-input,.uc-select,.uc-textarea{width:100%;height:40px;padding:0 var(--space-3);background:var(--surface);border:1px solid var(--border-control);border-radius:var(--radius-sm);font:var(--text-body);color:var(--text-primary);transition:border-color var(--duration-fast) var(--ease)}
+.uc-textarea{height:auto;padding:var(--space-3);min-height:88px;resize:vertical}
+.uc-input:hover,.uc-select:hover,.uc-textarea:hover{border-color:var(--border-strong)}
+.uc-input::placeholder,.uc-textarea::placeholder{color:var(--text-disabled)}
+.uc-input[disabled],.uc-select[disabled],.uc-textarea[disabled]{background:var(--surface-sunken);color:var(--text-disabled);border-color:var(--border);cursor:not-allowed}
+.uc-input[readonly],.uc-textarea[readonly]{background:var(--surface-sunken)}
+.uc-field--error .uc-input,.uc-field--error .uc-select,.uc-field--error .uc-textarea{border-color:var(--danger)}
+.uc-hint{font:400 12px/16px var(--font-body);color:var(--text-muted)}
+.uc-hint--error{color:var(--danger)}
+.uc-select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 16px) 18px,calc(100% - 11px) 18px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:var(--space-8);color:var(--text-primary)}
+
+/* ── choice ─────────────────────────────────────────────── */
+.uc-choice{display:flex;align-items:center;gap:var(--space-2);cursor:pointer;font:var(--text-body);color:var(--text-primary)}
+.uc-choice input[type=checkbox],.uc-choice input[type=radio]{width:18px;height:18px;flex:none;margin:0;cursor:pointer;accent-color:var(--accent)}
+/* Checkbox and radio are deliberately left native: the browser's own border already
+   clears 3:1 against --surface, and accent-color paints the checked state brand blue.
+   appearance:none would break the tick and the dot, so it is not used here. */
+.uc-choice--disabled{color:var(--text-disabled);cursor:not-allowed}
+.uc-choice input[disabled]{cursor:not-allowed;opacity:.55}
+[data-theme="dark"]{color-scheme:dark}
+.uc-switch{position:relative;width:40px;height:24px;flex:none}
+.uc-switch input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;width:100%;height:100%}
+.uc-switch i{position:absolute;inset:0;background:var(--border-control);border-radius:var(--radius-full);transition:background var(--duration-base) var(--ease);pointer-events:none}
+.uc-switch i::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform var(--duration-base) var(--ease)}
+.uc-switch input:checked + i{background:var(--accent)}
+.uc-switch input:checked + i::after{transform:translateX(16px)}
+.uc-switch input:focus-visible + i{outline:2px solid var(--focus-ring);outline-offset:2px}
+.uc-switch input[disabled] + i{opacity:.5}
+
+/* ── card ───────────────────────────────────────────────── */
+.uc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--space-5)}
+.uc-card--interactive{cursor:pointer;transition:border-color var(--duration-fast) var(--ease);text-align:left;font:inherit;color:inherit;width:100%}
+.uc-card--interactive:hover{border-color:var(--accent)}
+.uc-card--sunken{background:var(--surface-sunken)}
+.uc-card--flush{padding:0}
+@media (max-width:1023px){.uc-card{padding:var(--space-4)}}
+
+/* ── badge ──────────────────────────────────────────────── */
+.uc-badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 var(--space-3);border-radius:var(--radius-full);font:600 12px/1.2 var(--font-body);white-space:nowrap}
+.uc-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.uc-badge--nodot::before{display:none}
+.uc-badge--success{background:var(--success-bg);color:var(--success)}
+.uc-badge--warning{background:var(--warning-bg);color:var(--warning)}
+.uc-badge--danger{background:var(--danger-bg);color:var(--danger)}
+.uc-badge--info{background:var(--info-bg);color:var(--info)}
+.uc-badge--neutral{background:var(--surface-sunken);color:var(--text-secondary)}
+
+/* ── table ──────────────────────────────────────────────── */
+.uc-tablewrap{overflow:auto;max-height:var(--table-max-h,none);border-radius:var(--radius-md);background:var(--surface)}
+.uc-table{width:100%;min-width:max-content;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+/* overflow:hidden on the table itself would make it the nearest scrollport and break
+   the sticky header — inside a wrapper, the wrapper handles rounding and clipping. */
+.uc-tablewrap > .uc-table{border-radius:0;border-left:0;border-right:0;overflow:visible}
+.uc-table th{text-align:left;white-space:nowrap;padding:var(--space-3) var(--space-4);font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--text-muted);background:var(--surface-sunken);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1}
+.uc-table td{padding:var(--space-4);border-bottom:1px solid var(--border);font:var(--text-body);height:var(--row-comfortable)}
+.uc-table tr:last-child td{border-bottom:none}
+.uc-table .uc-num{text-align:right;font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.uc-table th.uc-num{text-align:right}
+.uc-table--compact td{padding:var(--space-1) var(--space-4);height:var(--row-compact);line-height:1.2}
+.uc-table--compact td .uc-iconbtn{width:24px;height:24px}
+.uc-table--compact td .uc-badge{height:20px;padding:0 var(--space-2)}
+.uc-table--compact td .uc-choice input[type=checkbox],.uc-table--compact td .uc-choice input[type=radio]{width:16px;height:16px}
+.uc-table--compact td .uc-limitbar{height:5px}
+.uc-table tbody tr.uc-row--clickable{cursor:pointer;transition:background var(--duration-fast) var(--ease)}
+.uc-table tbody tr.uc-row--clickable:hover{background:var(--surface-sunken)}
+
+/* ── uCare-specific ─────────────────────────────────────── */
+.uc-limitbar{height:6px;border-radius:var(--radius-full);background:var(--surface-sunken);overflow:hidden}
+.uc-limitbar i{display:block;height:100%;background:var(--accent);border-radius:var(--radius-full);transition:width var(--duration-slow) var(--ease)}
+.uc-limitbar--warning i{background:var(--warning)}
+.uc-limitbar--danger i{background:var(--danger)}
+.uc-balance{display:flex;flex-direction:column;gap:var(--space-1)}
+.uc-balance b{color:var(--text-primary);font:500 32px/38px var(--font-mono);font-variant-numeric:tabular-nums;letter-spacing:var(--tracking-display)}
+.uc-balance--sm b{font-size:22px;line-height:28px}
+.uc-benefit{display:flex;flex-direction:column;gap:var(--space-3)}
+.uc-benefit-head{display:flex;align-items:center;gap:var(--space-3)}
+.uc-benefit-icon{width:40px;height:40px;flex:none;border-radius:var(--radius-sm);background:var(--accent-subtle);color:var(--accent);display:grid;place-items:center}
+.uc-caticon{color:var(--text-secondary);flex:none}
+
+/* ── feedback ───────────────────────────────────────────── */
+.uc-toast{display:flex;align-items:flex-start;gap:var(--space-3);max-width:400px;background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--space-4);box-shadow:var(--shadow-md)}
+.uc-toast b{display:block;color:var(--text-primary);font:600 15px/22px var(--font-body)}
+.uc-toast-dot{width:24px;height:24px;border-radius:var(--radius-full);flex:none;display:grid;place-items:center}
+.uc-overlay{position:fixed;inset:0;background:var(--overlay);display:grid;place-items:center;padding:var(--space-6);z-index:100;animation:uc-fade var(--duration-slow) var(--ease)}
+@keyframes uc-fade{from{opacity:0}}
+.uc-modal{width:100%;max-width:560px;background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);animation:uc-rise var(--duration-slow) var(--ease)}
+@keyframes uc-rise{from{opacity:0;transform:translateY(8px)}}
+.uc-modal-head{padding:var(--space-5);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:var(--space-4)}
+.uc-modal-body{padding:var(--space-5)}
+.uc-modal-foot{padding:var(--space-4) var(--space-5);border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:var(--space-3)}
+.uc-sheet-wrap{position:fixed;inset:0;background:var(--overlay);display:flex;align-items:flex-end;z-index:100;animation:uc-fade var(--duration-slow) var(--ease)}
+.uc-sheet{width:100%;background:var(--surface-raised);border-top-left-radius:var(--radius-lg);border-top-right-radius:var(--radius-lg);padding:var(--space-3) var(--space-4) var(--space-6);animation:uc-slide var(--duration-slow) var(--ease)}
+@keyframes uc-slide{from{transform:translateY(100%)}}
+.uc-sheet-grip{width:36px;height:4px;border-radius:var(--radius-full);background:var(--border-strong);margin:0 auto var(--space-4)}
+.uc-empty{display:flex;flex-direction:column;align-items:center;gap:var(--space-3);padding:var(--space-12) var(--space-6);text-align:center;border:1px dashed var(--border-strong);border-radius:var(--radius-md)}

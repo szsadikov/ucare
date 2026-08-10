@@ -1,0 +1,260 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   uCare design tokens.
+
+   Blocks one to seven are the design system itself: fonts, colours,
+   typography, spacing, shape, motion and a minimal reset.
+
+   Block eight holds layout values that would otherwise be repeated inline
+   across components — brand-surface text colours, fixed shell sizes, font
+   shorthands and the per-breakpoint paddings and grids. Everything lives here
+   so that no component carries a hard-coded value.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── fonts ──────────────────────────────────────────────────────────────────
+   Axiforma (--font-display) is the brand typeface by Kastelov, not on Google
+   Fonts, so it is self-hosted from public/fonts/. Weight 400 ships as the
+   "Book" file — that is Axiforma's regular.
+   Roboto and Roboto Mono come from Google Fonts as variable axes: the system
+   needs weight 600 (h3, caption, overline, buttons) and the static set has no
+   such cut, so the browser would synthesise a fake bold.                     */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400..700&family=Roboto+Mono:wght@400..500&display=swap");
+
+@font-face{font-family:'Axiforma';src:url('/fonts/Axiforma-Book.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('/fonts/Axiforma-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('/fonts/Axiforma-SemiBold.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('/fonts/Axiforma-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+
+/* ── colors ───────────────────────────────────────────────────────────────── */
+:root{
+  /* blue scale */
+  --blue-50:#EEF4FC;  --blue-100:#D9E6F8; --blue-200:#B5CDF0; --blue-300:#87AFE4;
+  --blue-400:#5BA3DE; --blue-500:#2C6FB0; --blue-600:#245D9B; --blue-700:#1D497E;
+  --blue-800:#16385F; --blue-900:#102741;
+
+  /* cool neutral scale */
+  --neutral-0:#FFFFFF;   --neutral-50:#F7F9FB;  --neutral-100:#EDF0F4;
+  --neutral-200:#DDE3EA; --neutral-300:#C3CCD8; --neutral-400:#8F9FB3;
+  --neutral-500:#5A7089; --neutral-600:#445368; --neutral-700:#35404F;
+  --neutral-800:#222C39; --neutral-900:#14243A;
+
+  /* status */
+  --success:#17784F; --success-bg:#E6F4EE;
+  --warning:#8F5D0C; --warning-bg:#FCF2DF;
+  --danger:#C0392F;  --danger-bg:#FBEAE8;
+  --info:#2C6FB0;    --info-bg:#EEF4FC;
+
+  /* brand mark gradient (logo + marketing only, never UI fills) */
+  --brand-gradient-from:var(--blue-500);
+  --brand-gradient-to:var(--blue-800);
+  --brand-gradient:linear-gradient(135deg,var(--brand-gradient-from),var(--brand-gradient-to));
+
+  /* semantic — light */
+  --bg:var(--neutral-100);
+  --surface:var(--neutral-0);
+  --surface-raised:var(--neutral-0);
+  --surface-sunken:var(--neutral-50);
+  --border:var(--neutral-200);
+  --border-strong:var(--neutral-300);
+  --border-control:#7E8B9D;             /* input borders, 3:1 against --surface */
+  --text-primary:var(--neutral-900);
+  --text-secondary:var(--neutral-600);
+  --text-muted:#576C84;                 /* content: caption, hint, overline — 4.73:1 on --bg */
+  --text-disabled:var(--neutral-400);   /* placeholders and disabled — a WCAG exception */
+  --text-on-accent:#FFFFFF;
+  --accent:var(--blue-500);
+  --accent-hover:var(--blue-600);
+  --accent-active:var(--blue-700);
+  --accent-subtle:var(--blue-50);
+  --focus-ring:var(--blue-400);
+  --overlay:rgba(20,36,58,.5);
+}
+
+[data-theme="dark"]{
+  color:var(--text-primary);
+  background:var(--bg);
+  --bg:#0E1E33;
+  --surface:#16233B;
+  --surface-raised:#1D2C46;
+  --surface-sunken:#0A1523;
+  --border:#2A3A56;
+  --border-strong:#3B4E6E;
+  --border-control:#63769A;
+  --text-primary:#E8EDF4;
+  --text-secondary:#A3B1C6;
+  --text-muted:#7E8DA5;
+  --text-disabled:#6E7E96;
+  --text-on-accent:#0E1B2C;
+  --accent:var(--blue-400);
+  --accent-hover:var(--blue-300);
+  --accent-active:var(--blue-200);
+  --accent-subtle:rgba(91,163,222,.14);
+  --focus-ring:var(--blue-300);
+  --overlay:rgba(6,12,20,.66);
+  --success:#4CBE8C; --success-bg:rgba(23,120,79,.18);
+  --warning:#E0A64A; --warning-bg:rgba(143,93,12,.22);
+  --danger:#E97A70;  --danger-bg:rgba(192,57,47,.18);
+  --info:#7FBCEA;    --info-bg:rgba(91,163,222,.14);
+  --shadow-sm:none; --shadow-md:none; --shadow-lg:0 12px 32px rgba(0,0,0,.4);
+}
+
+/* ── typography ───────────────────────────────────────────────────────────── */
+:root{
+  --font-display:'Axiforma','Roboto',system-ui,sans-serif;
+  --font-body:'Roboto',system-ui,sans-serif;
+  --font-mono:'Roboto Mono',ui-monospace,monospace;
+
+  --text-display-l:700 40px/48px var(--font-display);
+  --text-display-m:700 32px/40px var(--font-display);
+  --text-h1:700 28px/36px var(--font-display);
+  --text-h2:600 22px/30px var(--font-display);
+  --text-h3:600 18px/24px var(--font-body);
+  --text-body-l:400 17px/26px var(--font-body);
+  --text-body:400 15px/22px var(--font-body);
+  --text-body-s:400 13px/18px var(--font-body);
+  --text-caption:500 12px/16px var(--font-body);
+  --text-overline:600 11px/14px var(--font-body);
+
+  --tracking-display:-.02em;
+  --tracking-heading:-.01em;
+  --tracking-overline:.08em;
+}
+
+/* ── spacing ──────────────────────────────────────────────────────────────── */
+:root{
+  --space-1:4px;  --space-2:8px;   --space-3:12px;  --space-4:16px;
+  --space-5:20px; --space-6:24px;  --space-8:32px;  --space-10:40px;
+  --space-12:48px; --space-16:64px;
+
+  --container-max:1200px;
+  --gutter-desktop:24px; --gutter-tablet:20px; --gutter-mobile:16px;
+  --margin-desktop:32px; --margin-tablet:24px; --margin-mobile:16px;
+
+  --bp-sm:640px; --bp-md:1024px; --bp-lg:1280px; --bp-xl:1440px;
+
+  --touch-min:44px;
+  --row-comfortable:52px; --row-compact:40px;
+}
+
+/* ── shape ────────────────────────────────────────────────────────────────── */
+:root{
+  --radius-sm:6px; --radius-md:10px; --radius-lg:16px; --radius-full:999px;
+  --border-width:1px;
+  --shadow-sm:0 1px 2px rgba(20,36,58,.06);
+  --shadow-md:0 4px 12px rgba(20,36,58,.08);
+  --shadow-lg:0 12px 32px rgba(20,36,58,.12);
+}
+
+/* ── motion ───────────────────────────────────────────────────────────────── */
+:root{
+  --duration-fast:120ms;
+  --duration-base:180ms;
+  --duration-slow:240ms;
+  --ease:cubic-bezier(0.2,0,0,1);
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+
+/* ── base: minimal reset + type utilities ─────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text-primary);font:var(--text-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;font-family:var(--font-display);color:var(--text-primary)}
+.h1,.h2,.h3,.display-l,.display-m{color:var(--text-primary)}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-hover);text-decoration:underline}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;border-radius:var(--radius-sm)}
+.display-l{font:var(--text-display-l);letter-spacing:var(--tracking-display)}
+.display-m{font:var(--text-display-m);letter-spacing:var(--tracking-display)}
+.h1{font:var(--text-h1);letter-spacing:var(--tracking-heading)}
+.h2{font:var(--text-h2);letter-spacing:var(--tracking-heading)}
+.h3{font:var(--text-h3)}
+.body-l{font:var(--text-body-l)}
+.body{font:var(--text-body)}
+.body-s{font:var(--text-body-s)}
+.caption{font:var(--text-caption);letter-spacing:.01em}
+.overline{font:var(--text-overline);letter-spacing:var(--tracking-overline);text-transform:uppercase;color:var(--text-muted)}
+.numeric{font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.text-secondary{color:var(--text-secondary)}
+.text-muted{color:var(--text-muted)}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Layout tokens
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  /* ── content on a brand surface (gradient, navy) ────────────────────────
+     The semantic --text-* tokens do not apply here: they are tuned for light
+     surfaces. On brand fills the scale is white at varying opacity.         */
+  --on-brand:#FFFFFF;
+  --on-brand-86:rgba(255,255,255,.86);
+  --on-brand-82:rgba(255,255,255,.82);
+  --on-brand-78:rgba(255,255,255,.78);
+  --on-brand-72:rgba(255,255,255,.72);
+  --on-brand-70:rgba(255,255,255,.7);
+  --on-brand-60:rgba(255,255,255,.6);
+  --on-brand-55:rgba(255,255,255,.55);
+  --on-brand-50:rgba(255,255,255,.5);
+  --on-brand-45:rgba(255,255,255,.45);
+  --on-brand-border-50:rgba(255,255,255,.5);
+  --on-brand-border-35:rgba(255,255,255,.35);
+  --on-brand-border-25:rgba(255,255,255,.25);
+  --on-brand-border-18:rgba(255,255,255,.18);
+  --on-brand-fill-16:rgba(255,255,255,.16);
+  --accent-tint-12:rgba(91,163,222,.12);   /* uCare column on the comparison block */
+
+  /* ── fixed shell sizes ───────────────────────────────────────────────── */
+  --sidebar-w:248px;       /* dashboard side navigation */
+  --hero-aside-w:400px;    /* card on the right of the hero */
+  --screencap-h:200px;     /* screen preview on the landing page */
+  --avatar:36px;           /* HR avatar in the top bar */
+  --logo-landing-h:32px;
+  --logo-cabinet-h:30px;
+  --logo-footer-h:56px;
+
+  /* ── type shorthands used inline across components ───────────────────── */
+  --text-amount-l:500 32px/38px var(--font-mono);      /* large amount */
+  --text-amount-m:500 22px/28px var(--font-mono);      /* medium amount, step number */
+  --text-stat:500 40px/48px var(--font-mono);          /* figure in the stats strip */
+  --text-stat-strong:700 32px/40px var(--font-mono);   /* figure in the research block */
+  --text-btn:600 15px/1.2 var(--font-body);
+  --text-btn-lg:600 17px/1.2 var(--font-body);
+  --text-pill:600 13px/1 var(--font-body);             /* language switcher */
+  --text-nav:500 15px/22px var(--font-body);           /* side navigation item */
+  --text-avatar:600 13px/1 var(--font-body);
+  --text-hero-mob:700 30px/38px var(--font-display);
+  --text-hero-tab:700 34px/42px var(--font-display);
+  --text-quote:700 44px/28px var(--font-display);      /* quote mark on a quote card */
+  --text-strong:600 15px/22px var(--font-body);        /* rule tile value, matrix cell */
+  --text-initials:600 15px/1 var(--font-body);         /* partner initials tile */
+  --text-chip:600 11px/14px var(--font-body);          /* caption in the ladder preview */
+  --text-chip-m:600 12px/16px var(--font-body);        /* caption on the ladder and rule scale */
+  --text-tile:500 17px/24px var(--font-body);          /* category tile, employee screen */
+  --text-tile-mob:500 15px/20px var(--font-body);
+  --text-tile-strong:600 17px/24px var(--font-body);   /* partner name on the QR card */
+  --text-code:500 17px/24px var(--font-mono);          /* payment code UC-… */
+
+  /* ── section padding per breakpoint ──────────────────────────────────── */
+  --pad-hdr:20px 48px;              --pad-hdr-mob:14px 20px;
+  --pad-hero:72px 48px 80px;        --pad-hero-tab:56px 32px 64px;   --pad-hero-mob:36px 20px 44px;
+  --pad-strip:28px 48px;            --pad-strip-mob:20px;
+  --pad-strip2:32px 48px;           --pad-strip2-mob:24px 20px;
+  --pad-sec:48px;                   --pad-sec-tab:40px 32px;         --pad-sec-mob:32px 20px;
+  --pad-main:32px;                  /* dashboard content padding */
+
+  /* ── grids per breakpoint ────────────────────────────────────────────── */
+  --grid-3:repeat(3,1fr);           --grid-3-tab:repeat(2,1fr);      --grid-3-mob:1fr;
+  --grid-3f:repeat(3,1fr);          --grid-3f-mob:1fr;               /* footer */
+  --grid-2:1fr 1.1fr;               --grid-2-mob:1fr;
+  --grid-2e:1fr 1fr;                --grid-2e-mob:1fr;
+  --grid-cats:repeat(7,1fr);        --grid-cats-tab:repeat(4,1fr);   --grid-cats-mob:repeat(2,1fr);
+  --grid-hero:1fr var(--hero-aside-w);  --grid-hero-narrow:1fr;
+  --gap-2:48px;                     --gap-2-mob:24px;
+
+  /* ── employee screen ─────────────────────────────────────────────────── */
+  --m-gap:24px;                     --m-gap-mob:12px;
+  --m-outer-pad:40px 0 64px;        --m-outer-pad-mob:12px 0 20px;
+  --m-pad:16px;                     --m-pad-mob:12px;
+  --m-cat-cols:repeat(2,1fr);       --m-cat-cols-mob:repeat(3,1fr);
+  --m-tile-pad:14px;                --m-tile-pad-mob:10px;
+  --qr-size:180px;                  --qr-size-mob:132px;
+  --phone-w:420px;                  /* phone mock width */
+}
